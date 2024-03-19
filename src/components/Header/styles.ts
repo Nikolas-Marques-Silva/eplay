@@ -5,7 +5,7 @@ export const HeaderBar = styled.header`
   background-color: ${colors.gray};
   padding: 24px;
   border-radius: 16px;
-  padding-bottom: 80px;
+  margin-bottom: 80px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -26,7 +26,7 @@ export const Links = styled.ul`
   margin-left: 40px;
 `
 
-export const Link = styled.li`
+export const LinkItem = styled.li`
   margin-right: 16px;
 `
 
