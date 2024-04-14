@@ -1,10 +1,11 @@
 import { useParams } from 'react-router-dom'
+import Hero from '../../components/Hero'
 
 const Product = () => {
   const { id } = useParams()
   return (
     <div>
-      <h1>Produto {id}</h1>
+      <Hero />
     </div>
   )
 }
