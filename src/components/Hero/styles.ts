@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { colors } from '../../styles'
+import { TagContainer } from '../Tag/styles'
 
 export const Banner = styled.div`
   height: 480px;
@@ -22,6 +23,10 @@ export const Banner = styled.div`
     height: 100%;
     background-color: #000;
     opacity: 0.56;
+  }
+
+  ${TagContainer} {
+    margin-right: 8px;
   }
 
   .container {

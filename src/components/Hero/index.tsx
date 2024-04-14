@@ -1,4 +1,5 @@
 import banner from '../../assets/images/fundo_hogwarts.png'
+import Button from '../Button'
 import Tag from '../Tag'
 
 import { Banner, Infos } from './styles'
@@ -18,7 +19,13 @@ const Hero = () => {
             <span>De R$250,00</span>
             por apenas R$190,90
           </p>
-          <button>Adicionar ao carrinho</button>
+          <Button
+            type="button"
+            title="Clique aqui para adicionar este item ao carrinho"
+            variant="primary"
+          >
+            Adicionar ao carrinho
+          </Button>
         </Infos>
       </div>
     </Banner>
