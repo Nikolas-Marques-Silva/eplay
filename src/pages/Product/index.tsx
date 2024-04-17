@@ -23,9 +23,11 @@ const Product = () => {
       </Section>
       <Section title="Mais detalhes" background="gray">
         <p>
-          <b>TÍTULO:</b> Hogwarts Legacy GÊNERO: Ação, Aventura, RPG <br />
+          <b>TÍTULO:</b> Hogwarts Legacy <br />
+          <b>GÊNERO:</b> Ação, Aventura, RPG <br />
           <b>DESENVOLVEDOR:</b> Avalanche Software <br />
-          <b>DISTRIBUIDORA:</b> Warner Bros. Games SÉRIE: WB Games <br />
+          <b>DISTRIBUIDORA:</b> Warner Bros. Games <br />
+          <b>SÉRIE:</b> WB Games <br />
           <b>DATA DE LANÇAMENTO:</b> 10/fev./2023
         </p>
       </Section>
