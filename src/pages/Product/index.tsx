@@ -2,38 +2,44 @@ import { useParams } from 'react-router-dom'
 import Hero from '../../components/Hero'
 import Section from '../../components/Section'
 import Gallery from '../../components/Gallery'
-import residentEvilImg from '../../assets/images/resident.png'
+import { useEffect, useState } from 'react'
+import { Game } from '../Home'
 
 const Product = () => {
   const { id } = useParams()
+
+  const [game, setGame] = useState<Game>()
+
+  useEffect(() => {
+    fetch(`https://fake-api-tau.vercel.app/api/eplay/jogos/${id}`)
+      .then((res) => res.json())
+      .then((res) => setGame(res))
+  }, [id])
+
+  if (!game) {
+    return <h3>Carregando...</h3>
+  }
+
   return (
     <div>
-      <Hero />
+      <Hero game={game} />
       <Section title="Sobre o jogo" background="black">
-        <p>
-          Hogwarts Legacy é um RPG de ação imersivo e de mundo aberto ambientado
-          no mundo introduzido pela primeira vez nos livros do Harry Potter.
-          Embarque em uma jornada por locais novos e familiares enquanto explora
-          e descubra animais fantásticos, personalize seu personagem e crie
-          poções, domine o lançamento de feitiços, aprimore talentos e torne-se
-          o bruxo que deseja ser. Experimente Hogwarts da década de 1800. Seu
-          personagem é um estudante com chave de um antigo segredo que ameaça
-          destruir o mundo bruxo. Faça aliados, lute contra os bruxos das trevas
-          e decida o destino do mundo bruxo. Seu legado é o que você faz dele.
-          Viva o Inesperado.
-        </p>
+        <p>{game.description}</p>
       </Section>
       <Section title="Mais detalhes" background="gray">
         <p>
-          <b>TÍTULO:</b> Hogwarts Legacy <br />
-          <b>GÊNERO:</b> Ação, Aventura, RPG <br />
-          <b>DESENVOLVEDOR:</b> Avalanche Software <br />
-          <b>DISTRIBUIDORA:</b> Warner Bros. Games <br />
-          <b>SÉRIE:</b> WB Games <br />
-          <b>DATA DE LANÇAMENTO:</b> 10/fev./2023
+          <b>Plataforma:</b> {game.details.system} <br />
+          <b>Desenvolvedor:</b> {game.details.developer} <br />
+          <b>Distribuidora:</b> {game.details.publisher} <br />
+          <b>Idiomas:</b> O jogo oferece suporte a vários idiomas, incluindo:{' '}
+          {game.details.languages.join(', ')} <br />
         </p>
       </Section>
-      <Gallery name="Jogo Teste" defaultCover={residentEvilImg} />
+      <Gallery
+        name={game.name}
+        defaultCover={game.media.cover}
+        itens={game.media.gallery}
+      />
     </div>
   )
 }

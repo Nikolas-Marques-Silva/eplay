@@ -9,6 +9,7 @@ export const ImagemHero = styled.div`
   background-size: cover;
   background-position: center;
   font-weight: bold;
+  position: relative;
 
   .container {
     position: relative;
@@ -16,11 +17,23 @@ export const ImagemHero = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+    z-index: 1;
   }
 
   ${TagContainer} {
     position: absolute;
     top: 32px;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    opacity: 0.7;
   }
 `
 

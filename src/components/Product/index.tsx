@@ -13,6 +13,7 @@ type Props = {
   description: string
   infos: string[]
   image: string
+  id: number
 }
 
 const Product = ({
@@ -21,10 +22,18 @@ const Product = ({
   system,
   description,
   infos,
-  image
+  image,
+  id
 }: Props) => {
+  const getDesription = (description: string) => {
+    if (description.length > 95) {
+      return description.slice(0, 92) + '...'
+    }
+    return description
+  }
+
   return (
-    <ProductCard>
+    <ProductCard to={`product/${id}`}>
       <img src={image} alt={title} />
       <ProductInfos>
         {infos.map((info) => (
@@ -36,7 +45,7 @@ const Product = ({
       <ProductTitle>{title}</ProductTitle>
       <Tag size="small">{category}</Tag>
       <Tag size="small">{system}</Tag>
-      <ProductDescription>{description}</ProductDescription>
+      <ProductDescription>{getDesription(description)}</ProductDescription>
     </ProductCard>
   )
 }

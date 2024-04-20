@@ -1,170 +1,47 @@
-import Game from '../../Models/Game'
+import { Game } from '../../pages/Home'
 import ProductsList from '../../components/ProductsList'
-import resident from '../../assets/images/resident.png'
-
-const rpg: Game[] = [
-  {
-    id: 1,
-    title: 'Resident Evil 7',
-    category: 'RPG',
-    system: 'PlayStation 4, PC',
-    description: 'test description',
-    image: resident,
-    infos: ['25/01']
-  },
-  {
-    id: 2,
-    title: 'Resident Evil 7',
-    category: 'RPG',
-    system: 'PlayStation 4, PC',
-    description: 'test description',
-    image: resident,
-    infos: ['25/01']
-  },
-  {
-    id: 3,
-    title: 'Resident Evil 7',
-    category: 'RPG',
-    system: 'PlayStation 4, PC',
-    description: 'test description',
-    image: resident,
-    infos: ['25/01']
-  },
-  {
-    id: 4,
-    title: 'Resident Evil 7',
-    category: 'RPG',
-    system: 'PlayStation 4, PC',
-    description: 'test description',
-    image: resident,
-    infos: ['25/01']
-  }
-]
-
-const action: Game[] = [
-  {
-    id: 1,
-    title: 'Resident Evil 7',
-    category: 'Action',
-    system: 'PlayStation 4, PC',
-    description: 'test description',
-    image: resident,
-    infos: ['25/01']
-  },
-  {
-    id: 2,
-    title: 'Resident Evil 7',
-    category: 'Action',
-    system: 'PlayStation 4, PC',
-    description: 'test description',
-    image: resident,
-    infos: ['25/01']
-  },
-  {
-    id: 3,
-    title: 'Resident Evil 7',
-    category: 'Action',
-    system: 'PlayStation 4, PC',
-    description: 'test description',
-    image: resident,
-    infos: ['25/01']
-  },
-  {
-    id: 4,
-    title: 'Resident Evil 7',
-    category: 'Action',
-    system: 'PlayStation 4, PC',
-    description: 'test description',
-    image: resident,
-    infos: ['25/01']
-  }
-]
-
-const adventure: Game[] = [
-  {
-    id: 1,
-    title: 'Resident Evil 7',
-    category: 'Aventura',
-    system: 'PlayStation 4, PC',
-    description: 'test description',
-    image: resident,
-    infos: ['25/01']
-  },
-  {
-    id: 2,
-    title: 'Resident Evil 7',
-    category: 'Aventura',
-    system: 'PlayStation 4, PC',
-    description: 'test description',
-    image: resident,
-    infos: ['25/01']
-  },
-  {
-    id: 3,
-    title: 'Resident Evil 7',
-    category: 'Aventura',
-    system: 'PlayStation 4, PC',
-    description: 'test description',
-    image: resident,
-    infos: ['25/01']
-  },
-  {
-    id: 4,
-    title: 'Resident Evil 7',
-    category: 'Aventura',
-    system: 'PlayStation 4, PC',
-    description: 'test description',
-    image: resident,
-    infos: ['25/01']
-  }
-]
-
-const fps: Game[] = [
-  {
-    id: 1,
-    title: 'Resident Evil 7',
-    category: 'FPS',
-    system: 'PlayStation 4, PC',
-    description: 'test description',
-    image: resident,
-    infos: ['25/01']
-  },
-  {
-    id: 2,
-    title: 'Resident Evil 7',
-    category: 'FPS',
-    system: 'PlayStation 4, PC',
-    description: 'test description',
-    image: resident,
-    infos: ['25/01']
-  },
-  {
-    id: 3,
-    title: 'Resident Evil 7',
-    category: 'FPS',
-    system: 'PlayStation 4, PC',
-    description: 'test description',
-    image: resident,
-    infos: ['25/01']
-  },
-  {
-    id: 4,
-    title: 'Resident Evil 7',
-    category: 'FPS',
-    system: 'PlayStation 4, PC',
-    description: 'test description',
-    image: resident,
-    infos: ['25/01']
-  }
-]
+import { useEffect, useState } from 'react'
 
 const Categorias = () => {
+  const [gamesAction, setGamesAction] = useState<Game[]>([])
+  const [gamesRPG, setGamesRPG] = useState<Game[]>([])
+  const [gamesEsport, setGamesEsport] = useState<Game[]>([])
+  const [gamesFight, setGamesFight] = useState<Game[]>([])
+  const [gamesSimulation, setGamesSimulation] = useState<Game[]>([])
+
+  useEffect(() => {
+    fetch('https://fake-api-tau.vercel.app/api/eplay/rpg')
+      .then((res) => res.json())
+      .then((res) => setGamesRPG(res))
+
+    fetch('https://fake-api-tau.vercel.app/api/eplay/esportes')
+      .then((res) => res.json())
+      .then((res) => setGamesEsport(res))
+
+    fetch('https://fake-api-tau.vercel.app/api/eplay/acao')
+      .then((res) => res.json())
+      .then((res) => setGamesAction(res))
+
+    fetch('https://fake-api-tau.vercel.app/api/eplay/luta')
+      .then((res) => res.json())
+      .then((res) => setGamesFight(res))
+
+    fetch('https://fake-api-tau.vercel.app/api/eplay/simulacao')
+      .then((res) => res.json())
+      .then((res) => setGamesSimulation(res))
+  }, [])
+
   return (
     <>
-      <ProductsList games={rpg} title="RPG" background="gray" />
-      <ProductsList games={action} title="Ação" background="black" />
-      <ProductsList games={adventure} title="Aventura" background="gray" />
-      <ProductsList games={fps} title="FPS" background="black" />
+      <ProductsList games={gamesRPG} title="RPG" background="black" />
+      <ProductsList games={gamesAction} title="Ação" background="gray" />
+      <ProductsList games={gamesEsport} title="Esportes" background="black" />
+      <ProductsList
+        games={gamesSimulation}
+        title="Simulação"
+        background="gray"
+      />
+      <ProductsList games={gamesFight} title="Luta" background="black" />
     </>
   )
 }
