@@ -33,7 +33,7 @@ const Product = ({
   }
 
   return (
-    <ProductCard to={`product/${id}`}>
+    <ProductCard to={`produto/${id}`}>
       <img src={image} alt={title} />
       <ProductInfos>
         {infos.map((info) => (
