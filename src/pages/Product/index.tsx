@@ -7,6 +7,7 @@ import { useGetGameQuery } from '../../services/api'
 const Product = () => {
   const { id } = useParams()
 
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const { data: game } = useGetGameQuery(id!)
 
   if (!game) {
