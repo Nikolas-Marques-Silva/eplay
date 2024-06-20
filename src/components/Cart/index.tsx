@@ -1,39 +1,53 @@
 import Button from '../Button'
 import * as S from './styles'
 
-import starWars from '../../assets/images/star_wars.png'
 import Tag from '../Tag'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootReducer } from '../../store'
+
+import { close, remove } from '../../store/reducers/cart'
+import { priceFormat } from '../ProductsList'
 
 const Cart = () => {
+  const { isOpen, items } = useSelector((state: RootReducer) => state.cart)
+
+  const dispatch = useDispatch()
+
+  const closeCart = () => {
+    dispatch(close())
+  }
+
+  const getTotalPrice = () => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    return items.reduce((acc, item) => (acc += item.prices.current!), 0)
+  }
+
+  const removeItem = (id: number) => {
+    dispatch(remove(id))
+  }
+
   return (
-    <S.Container>
-      <S.Overlay />
+    <S.Container className={isOpen ? 'is-open' : ''}>
+      <S.Overlay onClick={closeCart} />
       <S.Sidebar>
         <ul>
-          <S.Item>
-            <img src={starWars} alt="" />
-            <div>
-              <h3>Nome do jogo</h3>
-              <Tag>RPG</Tag>
-              <Tag>PS5</Tag>
-              <span>R$ 150,00</span>
-            </div>
-            <button type="button" />
-          </S.Item>
-          <S.Item>
-            <img src={starWars} alt="" />
-            <div>
-              <h3>Nome do jogo</h3>
-              <Tag>RPG</Tag>
-              <Tag>PS5</Tag>
-              <span>R$ 150,00</span>
-            </div>
-            <button type="button" />
-          </S.Item>
+          {items.map((item) => (
+            <S.Item key={item.id}>
+              <img src={item.media.thumbnail} alt={item.name} />
+              <div>
+                <h3>{item.name}</h3>
+                <Tag>{item.details.category}</Tag>
+                <Tag>{item.details.system}</Tag>
+                <span>{priceFormat(item.prices.current)}</span>
+              </div>
+              <button onClick={() => removeItem(item.id)} type="button" />
+            </S.Item>
+          ))}
         </ul>
-        <S.Descricption>X jogo(s) no carrinho</S.Descricption>
+        <S.Descricption>{items.length} jogo(s) no carrinho</S.Descricption>
         <S.Prices>
-          Total de R$XXX.XX <span>em até Xx sem juros</span>
+          Total de {priceFormat(getTotalPrice())}{' '}
+          <span>em até 6x sem juros</span>
         </S.Prices>
         <Button
           title="Clique aqui para prosseguir com a sua compra"
