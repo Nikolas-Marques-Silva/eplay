@@ -28,7 +28,7 @@ const api = createApi({
       query: () => 'luta'
     }),
     getSimulationGames: builder.query<Game[], void>({
-      query: () => 'simulcao'
+      query: () => 'simulacao'
     }),
     getGame: builder.query<Game, string>({
       query: (id) => `jogos/${id}`

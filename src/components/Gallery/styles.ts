@@ -3,10 +3,8 @@ import { colors } from '../../styles'
 
 export const Itens = styled.ul`
   display: flex;
-
-  li + li {
-    margin-left: 16px;
-  }
+  flex-wrap: wrap;
+  gap: 16px;
 `
 
 export const Action = styled.div`

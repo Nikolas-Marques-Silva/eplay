@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { colors } from '../../styles'
+import { breakpoints, colors } from '../../styles'
 
 export const HeaderBar = styled.header`
   background-color: ${colors.gray};
@@ -18,6 +18,10 @@ export const HeaderBar = styled.header`
   div {
     display: flex;
     align-items: center;
+  }
+
+  @media (max-width: ${breakpoints.mobile}) {
+    display: none;
   }
 `
 

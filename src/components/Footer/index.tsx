@@ -1,10 +1,4 @@
-import {
-  Container,
-  Links,
-  LinkItem,
-  SectionTitle,
-  FooterSection
-} from './styles'
+import { Container, Links, Link, SectionTitle, FooterSection } from './styles'
 
 const Footer = () => {
   return (
@@ -14,25 +8,19 @@ const Footer = () => {
           <SectionTitle>Categorias</SectionTitle>
           <Links>
             <li>
-              <LinkItem>RPG</LinkItem>
+              <Link to="/categorias#rpg">RPG</Link>
             </li>
             <li>
-              <LinkItem>Ação</LinkItem>
+              <Link to="/categorias#action">Ação</Link>
             </li>
             <li>
-              <LinkItem>Aventura</LinkItem>
+              <Link to="/categorias#fighting">Luta</Link>
             </li>
             <li>
-              <LinkItem>FPS</LinkItem>
+              <Link to="/categorias#simulation">Simulação</Link>
             </li>
             <li>
-              <LinkItem>Simulação</LinkItem>
-            </li>
-            <li>
-              <LinkItem>Plataforma</LinkItem>
-            </li>
-            <li>
-              <LinkItem>Esportes</LinkItem>
+              <Link to="/categorias#sport">Esportes</Link>
             </li>
           </Links>
         </FooterSection>
@@ -40,13 +28,10 @@ const Footer = () => {
           <SectionTitle>Acesso Rápido</SectionTitle>
           <Links>
             <li>
-              <LinkItem>Novidades</LinkItem>
+              <Link to="/#on-sale">Promoções</Link>
             </li>
             <li>
-              <LinkItem>Promoções</LinkItem>
-            </li>
-            <li>
-              <LinkItem>Em Breve</LinkItem>
+              <Link to="/#coming-soon">Em Breve</Link>
             </li>
           </Links>
         </FooterSection>
