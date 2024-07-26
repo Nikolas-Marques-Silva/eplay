@@ -1,16 +1,18 @@
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 import Button from '../Button'
 import Tag from '../Tag'
 
 import { RootReducer } from '../../store'
 import { close, remove } from '../../store/reducers/cart'
-import { priceFormat } from '../../utils'
+import { priceFormat, getTotalPrice } from '../../utils'
 
 import * as S from './styles'
 
 const Cart = () => {
   const { isOpen, items } = useSelector((state: RootReducer) => state.cart)
+  const navigate = useNavigate()
 
   const dispatch = useDispatch()
 
@@ -18,13 +20,13 @@ const Cart = () => {
     dispatch(close())
   }
 
-  const getTotalPrice = () => {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    return items.reduce((acc, item) => (acc += item.prices.current!), 0)
-  }
-
   const removeItem = (id: number) => {
     dispatch(remove(id))
+  }
+
+  const goToCheckout = () => {
+    closeCart()
+    navigate('/checkout')
   }
 
   return (
@@ -41,18 +43,23 @@ const Cart = () => {
                 <Tag>{item.details.system}</Tag>
                 <span>{priceFormat(item.prices.current)}</span>
               </div>
-              <button onClick={() => removeItem(item.id)} type="button" />
+              <button
+                style={{ cursor: 'pointer' }}
+                onClick={() => removeItem(item.id)}
+                type="button"
+              />
             </S.Item>
           ))}
         </ul>
         <S.Descricption>{items.length} jogo(s) no carrinho</S.Descricption>
         <S.Prices>
-          Total de {priceFormat(getTotalPrice())}{' '}
+          Total de {priceFormat(getTotalPrice(items))}{' '}
           <span>em até 6x sem juros</span>
         </S.Prices>
         <Button
           title="Clique aqui para prosseguir com a sua compra"
           type="button"
+          onClick={goToCheckout}
         >
           Continuar com a compra
         </Button>
