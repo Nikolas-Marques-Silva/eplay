@@ -1,9 +1,10 @@
-import { ImagemHero, HeroTitle, Prices } from './styles'
-
 import Tag from '../Tag'
 import Button from '../Button'
-import { priceFormat } from '../ProductsList'
+
+import { priceFormat } from '../../utils'
 import { useGetFeaturedGameQuery } from '../../services/api'
+
+import * as S from './styles'
 
 const Banner = () => {
   const { data: game } = useGetFeaturedGameQuery()
@@ -13,15 +14,15 @@ const Banner = () => {
   }
 
   return (
-    <ImagemHero style={{ backgroundImage: `url(${game.media.cover})` }}>
+    <S.ImageHero style={{ backgroundImage: `url(${game.media.cover})` }}>
       <div className="container">
         <Tag size="big">Destaque do dia</Tag>
         <div>
-          <HeroTitle>{game.name}</HeroTitle>
-          <Prices>
+          <S.HeroTitle>{game.name}</S.HeroTitle>
+          <S.Prices>
             De <span>{priceFormat(game.prices.old)}</span> <br />
             por apenas {priceFormat(game.prices.current)}
-          </Prices>
+          </S.Prices>
         </div>
         <Button
           type="link"
@@ -31,7 +32,7 @@ const Banner = () => {
           Aproveitar
         </Button>
       </div>
-    </ImagemHero>
+    </S.ImageHero>
   )
 }
 

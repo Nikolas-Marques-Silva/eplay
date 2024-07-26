@@ -1,10 +1,13 @@
+import { useState } from 'react'
+
 import Section from '../Section'
 import play from '../../assets/images/play.png'
 import zoom from '../../assets/images/zoom.png'
 import close from '../../assets/images/fechar.png'
-import { Itens, Item, Action, Modal, ModalContent } from './styles'
-import { useState } from 'react'
+
 import { GalleryItem } from '../../pages/Home'
+
+import * as S from './styles'
 
 type Props = {
   defaultCover: string
@@ -36,9 +39,9 @@ const Gallery = ({ defaultCover, name, itens }: Props) => {
   return (
     <>
       <Section title="Galeria" background="black">
-        <Itens>
+        <S.Itens>
           {itens.map((media: GalleryItem, index: number) => (
-            <Item
+            <S.Item
               key={media.url}
               onClick={() => {
                 setModal({
@@ -52,18 +55,18 @@ const Gallery = ({ defaultCover, name, itens }: Props) => {
                 src={getMediaCover(media)}
                 alt={`Media ${index + 1} de ${name}`}
               />
-              <Action>
+              <S.Action>
                 <img
                   src={getMediaIcon(media)}
                   alt="Clique para maximizar a mídia"
                 />
-              </Action>
-            </Item>
+              </S.Action>
+            </S.Item>
           ))}
-        </Itens>
+        </S.Itens>
       </Section>
-      <Modal className={modal.isVisible ? 'visible' : ''}>
-        <ModalContent className="container">
+      <S.Modal className={modal.isVisible ? 'visible' : ''}>
+        <S.ModalContent className="container">
           <header>
             <h4>{name}</h4>
             <img
@@ -87,12 +90,12 @@ const Gallery = ({ defaultCover, name, itens }: Props) => {
           ) : (
             <img src={modal.url} alt="" />
           )}
-        </ModalContent>
+        </S.ModalContent>
         <div
           className="overlay"
           onClick={() => setModal({ ...modal, isVisible: false })}
         ></div>
-      </Modal>
+      </S.Modal>
     </>
   )
 }

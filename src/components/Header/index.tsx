@@ -1,21 +1,15 @@
-import {
-  HeaderBar,
-  Links,
-  LinkItem,
-  LinkCart,
-  Hamburguer,
-  HeaderRow,
-  NavMobile
-} from './styles'
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { HashLink } from 'react-router-hash-link'
 
 import logo from '../../assets/images/logo.svg'
 import carrinho from '../../assets/images/carrinho.svg'
 
 import { open } from '../../store/reducers/cart'
-import { useDispatch, useSelector } from 'react-redux'
 import { RootReducer } from '../../store'
-import { useState } from 'react'
+
+import * as S from './styles'
 
 const Header = () => {
   const dispatch = useDispatch()
@@ -27,51 +21,84 @@ const Header = () => {
   }
 
   return (
-    <HeaderBar>
-      <HeaderRow>
+    <S.HeaderBar>
+      <S.HeaderRow>
         <div>
-          <Hamburguer onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          <S.Hamburguer onClick={() => setIsMenuOpen(!isMenuOpen)}>
             <span />
             <span />
             <span />
-          </Hamburguer>
+          </S.Hamburguer>
           <Link to="/">
             <img src={logo} alt="EPLAY logo" />
           </Link>
           <nav className={isMenuOpen ? 'is-open' : ''}>
-            <Links>
-              <LinkItem>
-                <Link to="/categorias">Categorias</Link>
-              </LinkItem>
-              <LinkItem>
-                <a href="#">Novidades</a>
-              </LinkItem>
-              <LinkItem>
-                <a href="#">Promoções</a>
-              </LinkItem>
-            </Links>
+            <S.Links>
+              <S.LinkItem>
+                <Link
+                  title="Clique aqui para ver as categorias"
+                  to="/categorias"
+                >
+                  Categorias
+                </Link>
+              </S.LinkItem>
+              <S.LinkItem>
+                <HashLink
+                  title="Clique aqui para ver as promocões"
+                  to="/#on-sale"
+                >
+                  Promoções
+                </HashLink>
+              </S.LinkItem>
+              <S.LinkItem>
+                <HashLink
+                  title="Clique aqui para ver as novidades"
+                  to="/#coming-soon"
+                >
+                  Em-breve
+                </HashLink>
+              </S.LinkItem>
+            </S.Links>
           </nav>
         </div>
-        <LinkCart href="#" onClick={openCart}>
+        <S.CartLink href="#" onClick={openCart}>
           {items.length}
           <span> - Produto(s)</span>
           <img src={carrinho} alt="Carrinho" />
-        </LinkCart>
-      </HeaderRow>
-      <NavMobile className={isMenuOpen ? 'is-open' : ''}>
-        <Links>
-          <LinkItem>
-            <Link to="/categorias">Categorias</Link>
-          </LinkItem>
-          <LinkItem>
-            <a href="#">Novidades</a>
-          </LinkItem>
-          <LinkItem>
-            <a href="#">Promoções</a>
-          </LinkItem>
-        </Links>
-      </NavMobile>
-    </HeaderBar>
+        </S.CartLink>
+      </S.HeaderRow>
+      <S.NavMobile className={isMenuOpen ? 'is-open' : ''}>
+        <S.Links>
+          <S.LinkItem>
+            <Link
+              onClick={() => setIsMenuOpen(false)}
+              title="Clique aqui para ver as categorias"
+              to="/categorias"
+            >
+              Categorias
+            </Link>
+          </S.LinkItem>
+          <S.LinkItem>
+            <HashLink
+              onClick={() => setIsMenuOpen(false)}
+              title="Clique aqui para ver as promocões"
+              to="/#on-sale"
+            >
+              Promoções
+            </HashLink>
+          </S.LinkItem>
+          <S.LinkItem>
+            <HashLink
+              onClick={() => setIsMenuOpen(false)}
+              title="Clique aqui para ver as novidades"
+              to="/#coming-soon"
+            >
+              Em-breve
+            </HashLink>
+          </S.LinkItem>
+        </S.Links>
+      </S.NavMobile>
+    </S.HeaderBar>
   )
 }
 

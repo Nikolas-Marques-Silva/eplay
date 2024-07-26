@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { TagContainer } from '../Tag/styles'
 
-export const ImagemHero = styled.div`
+export const ImageHero = styled.div`
   width: 100%;
   height: 560px;
   display: block;

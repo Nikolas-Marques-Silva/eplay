@@ -71,7 +71,7 @@ export const LinkItem = styled.li`
   }
 `
 
-export const LinkCart = styled.a`
+export const CartLink = styled.a`
   display: flex;
 
   img {
