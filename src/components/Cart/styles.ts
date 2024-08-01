@@ -40,6 +40,14 @@ export const Sidebar = styled.aside`
     max-width: 100%;
     width: 100%;
   }
+
+  .empty-cart {
+    color: ${colors.white};
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: bold;
+    text-align: center;
+  }
 `
 
 export const Descricption = styled.p`

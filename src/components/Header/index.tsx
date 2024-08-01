@@ -30,7 +30,9 @@ const Header = () => {
             <span />
           </S.Hamburguer>
           <Link to="/">
-            <img src={logo} alt="EPLAY logo" />
+            <h1>
+              <img src={logo} alt="EPLAY logo" />
+            </h1>
           </Link>
           <nav className={isMenuOpen ? 'is-open' : ''}>
             <S.Links>
@@ -61,7 +63,7 @@ const Header = () => {
             </S.Links>
           </nav>
         </div>
-        <S.CartLink href="#" onClick={openCart}>
+        <S.CartLink role="button" onClick={openCart}>
           {items.length}
           <span> - Produto(s)</span>
           <img src={carrinho} alt="Carrinho" />

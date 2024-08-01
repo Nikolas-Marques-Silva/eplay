@@ -33,36 +33,45 @@ const Cart = () => {
     <S.Container className={isOpen ? 'is-open' : ''}>
       <S.Overlay onClick={closeCart} />
       <S.Sidebar>
-        <ul>
-          {items.map((item) => (
-            <S.Item key={item.id}>
-              <img src={item.media.thumbnail} alt={item.name} />
-              <div>
-                <h3>{item.name}</h3>
-                <Tag>{item.details.category}</Tag>
-                <Tag>{item.details.system}</Tag>
-                <span>{priceFormat(item.prices.current)}</span>
-              </div>
-              <button
-                style={{ cursor: 'pointer' }}
-                onClick={() => removeItem(item.id)}
-                type="button"
-              />
-            </S.Item>
-          ))}
-        </ul>
-        <S.Descricption>{items.length} jogo(s) no carrinho</S.Descricption>
-        <S.Prices>
-          Total de {priceFormat(getTotalPrice(items))}{' '}
-          <span>em até 6x sem juros</span>
-        </S.Prices>
-        <Button
-          title="Clique aqui para prosseguir com a sua compra"
-          type="button"
-          onClick={goToCheckout}
-        >
-          Continuar com a compra
-        </Button>
+        {items.length > 0 ? (
+          <>
+            <ul>
+              {items.map((item) => (
+                <S.Item key={item.id}>
+                  <img src={item.media.thumbnail} alt={item.name} />
+                  <div>
+                    <h3>{item.name}</h3>
+                    <Tag>{item.details.category}</Tag>
+                    <Tag>{item.details.system}</Tag>
+                    <span>{priceFormat(item.prices.current)}</span>
+                  </div>
+                  <button
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => removeItem(item.id)}
+                    type="button"
+                  />
+                </S.Item>
+              ))}
+            </ul>
+            <S.Descricption>{items.length} jogo(s) no carrinho</S.Descricption>
+            <S.Prices>
+              Total de {priceFormat(getTotalPrice(items))}{' '}
+              <span>em até 6x sem juros</span>
+            </S.Prices>
+            <Button
+              title="Clique aqui para prosseguir com a sua compra"
+              type="button"
+              onClick={goToCheckout}
+            >
+              Continuar com a compra
+            </Button>
+          </>
+        ) : (
+          <p className="empty-cart">
+            O carrinho esta vazio, adicione um produto para continuar com a
+            compra
+          </p>
+        )}
       </S.Sidebar>
     </S.Container>
   )
